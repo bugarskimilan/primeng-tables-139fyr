@@ -1,0 +1,40 @@
+p {
+  font-family: Lato;
+}
+
+
+
+.row-header > th{
+  border: 0px;
+  background-color: transparent;
+}
+
+
+
+   .outerDiv {
+      background: white;
+      height: 250px;
+      width: 45px;
+      border: 1px solid #D5D5D5;
+      border-bottom: 0;
+      border-left: 0;
+      transform: skew(-30deg) translateX(65px) translateY(7px);
+    }
+
+   th:nth-child(2) .outerDiv {
+      border-left: 1px solid #D5D5D5;
+      position: relative;
+    }
+
+    .innerDiv {
+      position: absolute;
+      width: 250px;
+      height: 25px;
+      bottom: -35%;
+      left: 5px;
+      transform: skew(30deg) rotate(-60deg) translateX(95px);
+      transform-origin: 0 0;
+      text-align: left;
+      color: #212121;
+      font-weight: normal
+    }

@@ -1,0 +1,44 @@
+<div class="ui-g">
+	<div class="ui-g-10">
+
+		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false">
+			<ng-template pTemplate="header">
+				<tr class='row-header'>
+					<th></th>
+					<th style='width: 45px;' *ngFor='let col of cols'>
+						<div class="outerDiv">
+							<div class="innerDiv">{{col.ReportName}}</div>
+						</div>
+					</th>
+
+				</tr>
+			</ng-template>
+			<ng-template pTemplate="body" let-rowData let-expanded="expanded">
+				<tr>
+           <td>
+              <a href="#" [pRowToggler]="rowData" >
+                    <i [ngClass]="expanded ? 'pi-chevron-circle-down' : 'pi-chevron-circle-right'"></i>
+                    <span>{{rowData.FundAccountName}}</span>
+                </a>
+             <!-- <span style="font-weight:bold">{{rowData.FundAccountName}}</span> -->
+            </td>
+            <td *ngFor="let report of cols">
+                   <p-checkbox binary="true" [(ngModel)]='rowData.allChecked'></p-checkbox>
+            </td>  
+        </tr>
+        
+			
+			</ng-template>
+      <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex" let-columns="columns">
+          <tr *ngFor='let user of rowData.users'>
+              <td>
+                {{user.UserFullName}}
+              </td>
+              <td *ngFor="let report of user.reports">
+                <p-checkbox binary="true" [(ngModel)]="report['isDeliveredToUser']"></p-checkbox>
+              </td>
+				  </tr>
+      </ng-template>
+		</p-table>
+	</div>
+</div>
