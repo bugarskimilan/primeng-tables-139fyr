@@ -12,13 +12,15 @@
 					</th>
 
 				</tr>
+
 			</ng-template>
 			<ng-template pTemplate="body" let-rowData let-expanded="expanded">
 				<tr>
            <td>
               <a href="#" [pRowToggler]="rowData" >
-                    <i [ngClass]="expanded ? 'pi-chevron-circle-down' : 'pi-chevron-circle-right'"></i>
+                  <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="vertical-align: sub;"></i>
                     <span>{{rowData.FundAccountName}}</span>
+                    
                 </a>
              <!-- <span style="font-weight:bold">{{rowData.FundAccountName}}</span> -->
             </td>
