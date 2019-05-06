@@ -1,22 +1,21 @@
 <div class="ui-g">
 	<div class="ui-g-10">
 
-		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false">
+		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false" [rowHover]="true"> 
 			<ng-template pTemplate="header">
 				<tr class='row-header'>
 					<th></th>
-					<th style='width: 45px;' *ngFor='let col of cols'>
-						<div class="outerDiv">
+					<th style='width: 45px;' *ngFor='let col of cols' >
+						<div class="outerDiv" [style.background-color]="col.mouseover ? 'yellow': 'transparent'">
 							<div class="innerDiv">{{col.ReportName}}</div>
 						</div>
 					</th>
-
 				</tr>
 
 			</ng-template>
-			<ng-template pTemplate="body" let-rowData let-expanded="expanded">
-				<tr>
-           <td>
+			<ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+				<tr (mouseover)='rowData.mouseover = true' (mouseout)='rowData.mouseover = false' >
+           <td [style.background-color]="rowData.mouseover ? 'yellow': 'transparent'">
               <a href="#" [pRowToggler]="rowData" >
                   <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="vertical-align: sub;"></i>
                     <span>{{rowData.FundAccountName}}</span>
@@ -24,8 +23,8 @@
                 </a>
              <!-- <span style="font-weight:bold">{{rowData.FundAccountName}}</span> -->
             </td>
-            <td *ngFor="let report of cols">
-                   <p-checkbox binary="true" [(ngModel)]='rowData.allChecked'></p-checkbox>
+            <td *ngFor="let col of cols" (mouseover)='col.mouseover = true' (mouseout)='col.mouseover = false'>
+                   <p-checkbox binary="true" [checkboxIcon]="'pi pi-minus-circle'" [(ngModel)]='rowData.allChecked'></p-checkbox>
             </td>  
         </tr>
         

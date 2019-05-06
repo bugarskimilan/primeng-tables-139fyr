@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import {dataService} from './data.service';
 
-export interface Car {
-    vin;
-    year;
-    brand;
-    color;
-}
-
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',

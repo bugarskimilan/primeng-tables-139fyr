@@ -38,3 +38,7 @@ p {
       color: #212121;
       font-weight: normal
     }
+
+.ui-datatable tr.ui-datatable-even:hover, .ui-datatable tr.ui-datatable-odd:hover {
+    background: #78BCFF;
+}
