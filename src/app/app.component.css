@@ -12,13 +12,14 @@ p {
 
 
    .outerDiv {
-      background: white;
+      
       height: 250px;
       width: 45px;
       border: 1px solid #D5D5D5;
       border-bottom: 0;
       border-left: 0;
-      transform: skew(-30deg) translateX(65px) translateY(7px);
+      transform: skew(-30deg) translateX(63px) translateY(7px);
+      
     }
 
    th:nth-child(2) .outerDiv {
@@ -36,9 +37,18 @@ p {
       transform-origin: 0 0;
       text-align: left;
       color: #212121;
-      font-weight: normal
+      font-weight: normal;
+      
     }
 
-.ui-datatable tr.ui-datatable-even:hover, .ui-datatable tr.ui-datatable-odd:hover {
-    background: #78BCFF;
-}
+/* :host ::ng-deep .ui-table .ui-table-thead > tr > th {
+            position: -webkit-sticky;
+            position: sticky;
+           top:0px;
+        }
+
+        @media screen and (max-width: 64em) {
+            :host ::ng-deep .ui-table .ui-table-thead > tr > th {
+                top: 100px;
+            }
+        } */

@@ -1,21 +1,22 @@
 <div class="ui-g">
 	<div class="ui-g-10">
 
-		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false" [rowHover]="true"> 
+		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false" [scrollable]="true" scrollHeight="600px"> 
 			<ng-template pTemplate="header">
-				<tr class='row-header'>
-					<th></th>
+				<tr class='row-header'  >
+					<th style='width: 100%'>
+          </th>
 					<th style='width: 45px;' *ngFor='let col of cols' >
-						<div class="outerDiv" [style.background-color]="col.mouseover ? 'yellow': 'transparent'">
+						<div class="outerDiv" [style.background-color]="col.mouseover ? 'yellow': '#f4f4f4'">
 							<div class="innerDiv">{{col.ReportName}}</div>
 						</div>
 					</th>
 				</tr>
 
 			</ng-template>
-			<ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+			<ng-template pTemplate="body" let-rowData let-expanded="expanded">
 				<tr (mouseover)='rowData.mouseover = true' (mouseout)='rowData.mouseover = false' >
-           <td [style.background-color]="rowData.mouseover ? 'yellow': 'transparent'">
+           <td [style.background-color]="rowData.mouseover ? 'yellow': 'inherit'">
               <a href="#" [pRowToggler]="rowData" >
                   <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="vertical-align: sub;"></i>
                     <span>{{rowData.FundAccountName}}</span>
@@ -23,19 +24,19 @@
                 </a>
              <!-- <span style="font-weight:bold">{{rowData.FundAccountName}}</span> -->
             </td>
-            <td *ngFor="let col of cols" (mouseover)='col.mouseover = true' (mouseout)='col.mouseover = false'>
+            <td *ngFor="let col of cols" (mouseover)='col.mouseover = true' (mouseout)='col.mouseover = false' style='width: 45px;'>
                    <p-checkbox binary="true" [checkboxIcon]="'pi pi-minus-circle'" [(ngModel)]='rowData.allChecked'></p-checkbox>
             </td>  
         </tr>
         
 			
 			</ng-template>
-      <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex" let-columns="columns">
-          <tr *ngFor='let user of rowData.users'>
-              <td>
+      <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">
+          <tr *ngFor='let user of rowData.users' (mouseover)='user.mouseover = true' (mouseout)='user.mouseover = false'>
+              <td [style.background-color]="user.mouseover ? 'yellow': 'inherit'">
                 {{user.UserFullName}}
               </td>
-              <td *ngFor="let report of user.reports">
+              <td *ngFor="let report of user.reports; let i = index" (mouseover)='cols[i].mouseover = true' (mouseout)='cols[i].mouseover = false'>
                 <p-checkbox binary="true" [(ngModel)]="report['isDeliveredToUser']"></p-checkbox>
               </td>
 				  </tr>
