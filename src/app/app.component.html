@@ -1,9 +1,8 @@
 <div class="ui-g">
 	<div class="ui-g-10">
-
 		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false" [scrollable]="true" scrollHeight="600px"> 
 			<ng-template pTemplate="header">
-				<tr class='row-header'  >
+				<tr class='row-header'>
 					<th style='width: 100%'>
           </th>
 					<th style='width: 45px;' *ngFor='let col of cols' >
@@ -12,7 +11,6 @@
 						</div>
 					</th>
 				</tr>
-
 			</ng-template>
 			<ng-template pTemplate="body" let-rowData let-expanded="expanded">
 				<tr (mouseover)='rowData.mouseover = true' (mouseout)='rowData.mouseover = false' >
@@ -20,16 +18,13 @@
               <a href="#" [pRowToggler]="rowData" >
                   <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="vertical-align: sub;"></i>
                     <span>{{rowData.FundAccountName}}</span>
-                    
-                </a>
+              </a>
              <!-- <span style="font-weight:bold">{{rowData.FundAccountName}}</span> -->
             </td>
-            <td *ngFor="let col of cols" (mouseover)='col.mouseover = true' (mouseout)='col.mouseover = false' style='width: 45px;'>
-                   <p-checkbox binary="true" [checkboxIcon]="'pi pi-minus-circle'" [(ngModel)]='rowData.allChecked'></p-checkbox>
+            <td *ngFor="let report of rowData.reports; let i = index" (mouseover)='cols[i].mouseover = true' (mouseout)='cols[i].mouseover = false' style='width: 45px;'>
+              <p-checkbox binary="true" [checkboxIcon]="report.deliveredToUsers == 'partial' ? 'pi pi-minus-circle' : 'pi pi-check'" [ngModel] = 'report.deliveredToUsers != "none"'></p-checkbox>
             </td>  
         </tr>
-        
-			
 			</ng-template>
       <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">
           <tr *ngFor='let user of rowData.users' (mouseover)='user.mouseover = true' (mouseout)='user.mouseover = false'>
@@ -37,7 +32,7 @@
                 {{user.UserFullName}}
               </td>
               <td *ngFor="let report of user.reports; let i = index" (mouseover)='cols[i].mouseover = true' (mouseout)='cols[i].mouseover = false'>
-                <p-checkbox binary="true" [(ngModel)]="report['isDeliveredToUser']"></p-checkbox>
+                <p-checkbox binary="true" [(ngModel)]="report['isDeliveredToUser']" (ngModelChange)='dataChanged($event)'></p-checkbox>
               </td>
 				  </tr>
       </ng-template>
