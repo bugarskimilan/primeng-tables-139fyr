@@ -67,6 +67,27 @@ export class AppComponent {
   dataChanged(e){
     // recalc the state
     this.data = this.generateTableData(this.data, this.cols);
+    // set dirty state
+  }
+
+  fundGroupSelectionChange(e, fund, reportid){
+    if (e){
+      (fund.users as any[]).forEach(user => {
+        (user.reports as any[]).find(r => r.ReportID == reportid).isDeliveredToUser = 1;
+      })
+    }
+    else{
+      (fund.users as any[]).forEach(user => {
+        (user.reports as any[]).find(r => r.ReportID == reportid).isDeliveredToUser = 0;
+      })
+    }
+
+    this.data = this.generateTableData(this.data, this.cols);
+  }
+
+  editReportName(report){
+    // here prompt the text input to edit the name, and 
+    // immediatley save to databese + refresh viewmodel
   }
 
 }

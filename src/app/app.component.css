@@ -7,12 +7,12 @@
 
    .outerDiv {
       
-      height: 250px;
+      height: 300px;
       width: 45px;
       border: 1px solid #D5D5D5;
       border-bottom: 0;
       border-left: 0;
-      transform: skew(-30deg) translateX(63px) translateY(7px);
+      transform: skew(-30deg) translateX(76px) translateY(7px);
       
     }
 
@@ -23,11 +23,11 @@
 
     .innerDiv {
       position: absolute;
-      width: 250px;
+      width: 300px;
       height: 25px;
       bottom: -35%;
       left: 5px;
-      transform: skew(30deg) rotate(-60deg) translateX(95px);
+      transform: skew(30deg) rotate(-60deg) translateX(110px);
       transform-origin: 0 0;
       text-align: left;
       color: #212121;
@@ -41,15 +41,3 @@
     overflow-y: scroll;
     margin-right: -15px;
   }
-
-/* :host ::ng-deep .ui-table .ui-table-thead > tr > th {
-            position: -webkit-sticky;
-            position: sticky;
-           top:0px;
-        }
-
-        @media screen and (max-width: 64em) {
-            :host ::ng-deep .ui-table .ui-table-thead > tr > th {
-                top: 100px;
-            }
-        } */

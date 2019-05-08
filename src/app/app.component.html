@@ -1,19 +1,22 @@
-<div class="ui-g">
+<p-card class="ui-g">
 	<div class="ui-g-10">
-		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false" [scrollable]="true" scrollHeight="600px"> 
+		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false" [scrollable]="true" scrollHeight="400px"> 
 			<ng-template pTemplate="header">
 				<tr class='row-header'>
 					<th style='width: 100%'>
           </th>
 					<th style='width: 45px;' *ngFor='let col of cols' >
 						<div class="outerDiv" [style.background-color]="col.mouseover ? 'yellow': '#f4f4f4'">
-							<div class="innerDiv">{{col.ReportName}}</div>
+							<div class="innerDiv">
+                <button pButton icon='pi pi-pencil' class='ui-button-info' (click)='editReportName(col)'></button>
+                {{col.ReportName}}
+              </div>
 						</div>
 					</th>
 				</tr>
 			</ng-template>
 			<ng-template pTemplate="body" let-rowData let-expanded="expanded">
-				<tr (mouseover)='rowData.mouseover = true' (mouseout)='rowData.mouseover = false' >
+				<tr (mouseover)='rowData.mouseover = true' (mouseout)='rowData.mouseover = false' style='background-color: lightgray' >
            <td [style.background-color]="rowData.mouseover ? 'yellow': 'inherit'">
               <a href="#" [pRowToggler]="rowData" >
                   <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="vertical-align: sub;"></i>
@@ -22,7 +25,11 @@
              <!-- <span style="font-weight:bold">{{rowData.FundAccountName}}</span> -->
             </td>
             <td *ngFor="let report of rowData.reports; let i = index" (mouseover)='cols[i].mouseover = true' (mouseout)='cols[i].mouseover = false' style='width: 45px;'>
-              <p-checkbox binary="true" [checkboxIcon]="report.deliveredToUsers == 'partial' ? 'pi pi-minus-circle' : 'pi pi-check'" [ngModel] = 'report.deliveredToUsers != "none"'></p-checkbox>
+              <p-checkbox 
+                binary="true" 
+                [checkboxIcon]="report.deliveredToUsers == 'partial' ? 'pi pi-minus-circle' : 'pi pi-check'" 
+                [ngModel] = 'report.deliveredToUsers != "none"'
+                (ngModelChange)='fundGroupSelectionChange($event, rowData, report.ReportID)'></p-checkbox>
             </td>  
         </tr>
 			</ng-template>
@@ -38,4 +45,4 @@
       </ng-template>
 		</p-table>
 	</div>
-</div>
+</p-card>
