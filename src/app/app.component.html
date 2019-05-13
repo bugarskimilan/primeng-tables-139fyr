@@ -1,9 +1,9 @@
 <p-card class="ui-g">
 	<div class="ui-g-10">
-		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false" [scrollable]="true" scrollHeight="400px"> 
+		<p-table [value]="data" dataKey="FundAccountName" [resizableColumns]="false" [scrollable]="true" scrollHeight="400px" [style]="{'min-width': '1000px'}" > 
 			<ng-template pTemplate="header">
 				<tr class='row-header'>
-					<th style='width: 100%'>
+					<th style='width: 100%;'>
           </th>
 					<th style='width: 45px;' *ngFor='let col of cols' >
 						<div class="outerDiv" [style.background-color]="col.mouseover ? 'yellow': '#f4f4f4'">
@@ -17,7 +17,7 @@
 			</ng-template>
 			<ng-template pTemplate="body" let-rowData let-expanded="expanded">
 				<tr (mouseover)='rowData.mouseover = true' (mouseout)='rowData.mouseover = false' style='background-color: lightgray' >
-           <td [style.background-color]="rowData.mouseover ? 'yellow': 'inherit'">
+           <td [style.background-color]="rowData.mouseover ? 'yellow': 'inherit'" >
               <a href="#" [pRowToggler]="rowData" >
                   <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'" style="vertical-align: sub;"></i>
                     <span>{{rowData.FundAccountName}}</span>
@@ -46,3 +46,10 @@
 		</p-table>
 	</div>
 </p-card>
+<p-dialog header="Edit Report Name" [(visible)]="showEditReportNameDialog" [modal]="true" [responsive]="true" [style]="{width: '450px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000">
+        <input id="input" type="text" pInputText [(ngModel)]="(selectedReport || {}).ReportName" size='50'> 
+        <p-footer>
+            <button type="button" pButton icon="pi pi-check" (click)="display=false" label="SAVE"></button>
+            <button type="button" pButton icon="pi pi-close" (click)="showEditReportNameDialog=false" label="CANCEL" class="ui-button-secondary"></button>
+        </p-footer>
+</p-dialog>

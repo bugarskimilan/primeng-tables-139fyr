@@ -85,9 +85,13 @@ export class AppComponent {
     this.data = this.generateTableData(this.data, this.cols);
   }
 
+  selectedReport : any;
+  showEditReportNameDialog : boolean = false;
   editReportName(report){
     // here prompt the text input to edit the name, and 
     // immediatley save to databese + refresh viewmodel
+    this.selectedReport = report;
+    this.showEditReportNameDialog = true;
   }
 
 }
