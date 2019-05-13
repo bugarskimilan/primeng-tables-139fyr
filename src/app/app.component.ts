@@ -23,9 +23,12 @@ export class AppComponent {
 
   cols: any[] = [];
 
+  tableDataDirty: boolean = false;
+
   constructor(private dataservice: dataService) {
     this.cols = this.getColumnsFromDataset(dataservice.data);
     this.data = this.generateTableData(dataservice.data, this.cols);
+    this.tableDataDirty = false;
   }
 
   // this can be done in map functuion directly from api call
@@ -36,7 +39,7 @@ export class AppComponent {
         let userDeliveryArray = this.getReportDeliveryListForFund(fund, r.ReportID);
         return { ...r, deliveredToUsers: (userDeliveryArray.length == fund.users.length) ? 'all' : userDeliveryArray.length > 0 ? 'partial' : 'none' }
       });
-    })
+    });
     return data;
   }
 
@@ -68,6 +71,7 @@ export class AppComponent {
     // recalc the state
     this.data = this.generateTableData(this.data, this.cols);
     // set dirty state
+    this.tableDataDirty = true;
   }
 
   fundGroupSelectionChange(e, fund, reportid){
@@ -81,8 +85,7 @@ export class AppComponent {
         (user.reports as any[]).find(r => r.ReportID == reportid).isDeliveredToUser = 0;
       })
     }
-
-    this.data = this.generateTableData(this.data, this.cols);
+    this.dataChanged(null);
   }
 
   selectedReport : any;
